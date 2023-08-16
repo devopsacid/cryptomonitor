@@ -1,0 +1,30 @@
+coins: 
+  - bitcoin: 
+      tags: 
+#        key: value
+  - ethereum:
+  - cardano:
+  - link:
+  - uniswap:
+  - polkadot:
+  - sushi:
+  - matic-network:
+  - orion-protocol:
+  - decentraland:
+  - neo:
+  - enjincoin:
+  - solana:
+  - algorand:
+  - theta-token:
+  - dogecoin:
+  - ripple:
+  - tron:
+  - aave:
+  - tether:
+      tags: 
+        token: erc-20
+  - binance-usd:
+  - usd-coin:
+  - sxp:
+  - holotoken:
+
