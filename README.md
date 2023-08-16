@@ -1,7 +1,5 @@
 # cryptomonitor
 
-# Coin Archiver Program
-
 ## Overview
 
 The Coin Archiver program is a Python script designed to fetch cryptocurrency data from CoinGecko and archive it either to JSON files on disk or to an InfluxDB instance. The program is configurable through environment variables, allowing for flexibility in its deployment and use.
@@ -58,6 +56,16 @@ python3 coin_archiver.py
 `archive_data_file(dir, data)`: Archives data to JSON files on disk.  
 `load_data_file(dir, datetime)`: Loads data from a JSON file on disk.  
 `archive_data_influx(data)`: Archives data to InfluxDB.  
+
+## Architecture
+```mermaid 
+flowchart LR
+    Coingecko_API-->cryptomonitor
+    cryptomonitor-->InfluxDB
+    cryptomonitor-->File_Archive
+    InfluxDB---Alerting
+    InfluxDB---Grafana
+```
 
 ## Contributing
 Feel free to submit pull requests or raise issues if you find any bugs or have suggestions for improvements.
