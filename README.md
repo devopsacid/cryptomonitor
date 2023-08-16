@@ -82,19 +82,21 @@ docker build -t cryptomonitor .
 Once the image is built, you can run the Coin Archiver program inside a Docker container using the following command:
 
 ```bash
-docker run coin-archiver
+docker run cryptomonitor
 ```
 
 ### Environment Variables with Docker
 If your script relies on environment variables, you can pass them to the Docker container using the `-e` flag:
-docker run -e TARGET_ENV=prod coin-archiver
 
 ```bash
-docker run -e TARGET_ENV=prod coin-archiver
+docker run -e TARGET_ENV=prod cryptomonitor
 ```
+or 
+```bash
+docker run -e TARGET_ENV=dev cryptomonitor
+```
+
 Replace `TARGET_ENV=prod` with your desired environment variable and value.
-
-
 
 ## Contributing
 Feel free to submit pull requests or raise issues if you find any bugs or have suggestions for improvements.
