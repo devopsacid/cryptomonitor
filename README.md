@@ -28,18 +28,18 @@ The Coin Archiver program is a Python script designed to fetch cryptocurrency da
 
 ## Environment Variables
 
-`TARGET_ENV`: Set to either 'dev' or 'prod' to determine which .env file to load.
-`DEBUG`: Set to 'true' to enable debug logging.
-`WORKDIR`: The working directory for the script. This is where the script will look for the coin list YAML file and where it will save JSON archives.
-`FILE_ARCHIVE`: Set to 'true' to enable archiving data to JSON files on disk.
-`INFLUX_ARCHIVE`: Set to 'true' to enable archiving data to InfluxDB.
-`INFLUX_HOST`: The hostname or IP address of your InfluxDB instance.
-`INFLUX_PORT`: The port number for your InfluxDB instance.
-`INFLUX_DB`: The name of the InfluxDB database to write to.
-`INFLUX_USER`: The username for authenticating with InfluxDB.
-`INFLUX_PASS`: The password for authenticating with InfluxDB.
-`INFLUX_BUCKET`: The bucket in InfluxDB to write to.
-`INFLUX_ORG`: The organization in InfluxDB to write under.
+`TARGET_ENV`: Set to either 'dev' or 'prod' to determine which .env file to load.  
+`DEBUG`: Set to 'true' to enable debug logging.  
+`WORKDIR`: The working directory for the script. This is where the script will look for the coin list YAML file and where it will save JSON archives.  
+`FILE_ARCHIVE`: Set to 'true' to enable archiving data to JSON files on disk.  
+`INFLUX_ARCHIVE`: Set to 'true' to enable archiving data to InfluxDB.  
+`INFLUX_HOST`: The hostname or IP address of your InfluxDB instance.  
+`INFLUX_PORT`: The port number for your InfluxDB instance.  
+`INFLUX_DB`: The name of the InfluxDB database to write to.  
+`INFLUX_USER`: The username for authenticating with InfluxDB.  
+`INFLUX_PASS`: The password for authenticating with InfluxDB.  
+`INFLUX_BUCKET`: The bucket in InfluxDB to write to.  
+`INFLUX_ORG`: The organization in InfluxDB to write under.  
 
 ## Usage
 Run the script using:
@@ -53,11 +53,11 @@ python3 coin_archiver.py
 ```
 
 ## Functions
-`load_yaml(filename)`: Loads a YAML file and returns its content.
-`load_cg_coins(coins, vs_currency)`: Fetches cryptocurrency data from CoinGecko.
-`archive_data_file(dir, data)`: Archives data to JSON files on disk.
-`load_data_file(dir, datetime)`: Loads data from a JSON file on disk.
-`archive_data_influx(data)`: Archives data to InfluxDB.
+`load_yaml(filename)`: Loads a YAML file and returns its content.  
+`load_cg_coins(coins, vs_currency)`: Fetches cryptocurrency data from CoinGecko.  
+`archive_data_file(dir, data)`: Archives data to JSON files on disk.  
+`load_data_file(dir, datetime)`: Loads data from a JSON file on disk.  
+`archive_data_influx(data)`: Archives data to InfluxDB.  
 
 ## Contributing
 Feel free to submit pull requests or raise issues if you find any bugs or have suggestions for improvements.
