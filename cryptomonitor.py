@@ -101,10 +101,12 @@ def main():
   # set environment
   targetEnv=os.getenv("TARGET_ENV", 'dev')
   # load .env variables into environment
-  if [ targetEnv == 'dev' ]:
+  if targetEnv == 'dev' and os.path.exists(".env.dev"):
     load_dotenv(".env.dev")
-  elif [ targetEnv == 'prod' ]:  
+  elif targetEnv == 'prod' and os.path.exists(".env.prod"):  
     load_dotenv(".env.prod")
+  elif os.path.exists(".env"):
+    load_dotenv(".env")
   else:
     print("TARGET_ENV not set to dev or prod")
     exit(1)
