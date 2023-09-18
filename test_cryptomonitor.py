@@ -1,6 +1,6 @@
 import pytest
 import os
-from unittest.mock import patch, mock_open, MagicMock
+from unittest.mock import patch, mock_open, MagicMock, call
 import cryptomonitor  # replace with the actual name of your script
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def test_archive_data_file(setup_env_vars):
     m = mock_open()
     with patch("cryptomonitor.open", m):
         cryptomonitor.archive_data_file(".", {"bitcoin": {"usd": 45000}})
-        m.assert_called_once_with("./jsons/.../coins_....json", 'w')  in m.mock_calls
+        assert call("./jsons/.../coins_....json", 'w') in m.mock_calls
 
 
 def test_load_data_file(setup_env_vars):
