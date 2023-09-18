@@ -66,7 +66,7 @@ def archive_data_influx(data):
     try:  
         # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)  
         with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
-        logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
+            logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
 
         # format output list
         output_list = []
