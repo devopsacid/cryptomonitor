@@ -1,4 +1,4 @@
 pycoingecko==2.2.0
-PyYAML==5.4.1
+PyYAML==6.0.1
 python-dotenv==0.19.1
 influxdb-client==1.22.0
