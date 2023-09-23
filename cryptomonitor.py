@@ -99,7 +99,7 @@ def archive_data_influx(data):
         # INFLUXDB_V2_AUTH_BASIC=True
         
         # For InfluxDB 1.8
-        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as client:
+        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_USER, INFLUX_PASS, INFLUX_DB) as client:
             logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
                     
             # write to InfluxDB 1.8
