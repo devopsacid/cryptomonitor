@@ -1,6 +1,6 @@
 version: '2'
 services:
-  cryptoonitor:
+  cryptomonitor:
     image: cryptomonitor:latest
     volumes:
       - ./jsons:/jsons
