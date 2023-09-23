@@ -4,7 +4,7 @@ import coin_yaml_helpers
 from yaml import safe_load, YAMLError
 from pycoingecko import CoinGeckoAPI
 
-from json import dumps
+from json import dumps 
 from sys import exit
 import os 
 from dotenv import load_dotenv
@@ -77,17 +77,6 @@ def archive_data_influx(data):
 
     # open InfluxDB client connection
     try:  
-        # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)
-        # INFLUXDB_V2_AUTH_BASIC=True
-        
-        # For InfluxDB 1.8
-        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as client:
-            logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
-            
-        ### For InfluxDB 2.0+
-        # with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
-        #     logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
-
         # format output list
         output_list = []
         for coin in data:
@@ -105,13 +94,24 @@ def archive_data_influx(data):
                 }
             }
             )
-            
-        # write to InfluxDB 1.8
-        with client.create_database(INFLUX_DB) as _create_client:
-            logging.debug(f"Client create database {INFLUX_DB} successful.")        
-        with client.write_points(output_list) as _write_client: 
-            logging.debug("Client write to InfluxDB successful.")
+
+        # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)
+        # INFLUXDB_V2_AUTH_BASIC=True
         
+        # For InfluxDB 1.8
+        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as client:
+            logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
+                    
+            # write to InfluxDB 1.8
+            with client.create_database(INFLUX_DB) as _create_client:
+                logging.debug(f"Client create database {INFLUX_DB} successful.")        
+            with client.write_points(output_list) as _write_client: 
+                logging.debug("Client write to InfluxDB successful.", dumps(output_list))
+        
+        ### For InfluxDB 2.0+
+        # with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
+        #     logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
+
         # write to InfluxDB 2.0+
         # with _client.write_api(write_options=SYNCHRONOUS) as _write_client: 
         #     _write_client.write(bucket=INFLUX_DB, record=output_list)
