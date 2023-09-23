@@ -71,8 +71,8 @@ def archive_data_influx(data):
     INFLUX_DB=os.getenv("INFLUX_DB", 'maindb')
     INFLUX_USER=os.getenv("INFLUX_USER", 'coinarchiver')
     INFLUX_PASS=os.getenv("INFLUX_PASS", 'coinpass')
-    INFLUX_BUCKET=os.getenv("INFLUX_BUCKET", 'cryptomon')
-    INFLUX_ORG=os.getenv("INFLUX_ORG", 'cryptomon')
+    # INFLUX_BUCKET=os.getenv("INFLUX_BUCKET", 'cryptomon')
+    # INFLUX_ORG=os.getenv("INFLUX_ORG", 'cryptomon')
     influxURL=f"http://{INFLUX_HOST}:{INFLUX_PORT}"
 
     # open InfluxDB client connection
@@ -81,7 +81,7 @@ def archive_data_influx(data):
         # INFLUXDB_V2_AUTH_BASIC=True
         
         # For InfluxDB 1.8
-        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as _client:
+        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as client:
             logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
             
         ### For InfluxDB 2.0+
@@ -107,9 +107,9 @@ def archive_data_influx(data):
             )
             
         # write to InfluxDB 1.8
-        with _client.create_database(INFLUX_DB) as _create_client:
+        with client.create_database(INFLUX_DB) as _create_client:
             logging.debug(f"Client create database {INFLUX_DB} successful.")        
-        with _client.write_points(output_list) as _write_client: 
+        with client.write_points(output_list) as _write_client: 
             logging.debug("Client write to InfluxDB successful.")
         
         # write to InfluxDB 2.0+
