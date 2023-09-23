@@ -4,6 +4,7 @@ services:
     image: cryptomonitor:latest
     volumes:
       - ./jsons:/jsons
+      - ./.env:/app/.env.prod
     env_file:
       - ./.env.cryptomonitor
     restart: always
