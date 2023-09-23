@@ -14,9 +14,11 @@ import traceback
 import logging
 import time
 
-from influxdb_client import InfluxDBClient, Point, WriteOptions
-from influxdb_client.client.write_api import SYNCHRONOUS
+# for version Influx 2.0+
+# from influxdb_client import InfluxDBClient, Point, WriteOptions
+# from influxdb_client.client.write_api import SYNCHRONOUS
 
+# for version Influx 1.8
 from influxdb import InfluxDBClient
 
 def load_env():
@@ -76,10 +78,13 @@ def archive_data_influx(data):
     # open InfluxDB client connection
     try:  
         # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)
-        INFLUXDB_V2_AUTH_BASIC=True
+        # INFLUXDB_V2_AUTH_BASIC=True
+        
+        # For InfluxDB 1.8
         with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS, debug=True) as _client:
             logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
             
+        ### For InfluxDB 2.0+
         # with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
         #     logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
 
