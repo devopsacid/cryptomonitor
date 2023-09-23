@@ -81,7 +81,7 @@ def archive_data_influx(data):
         # INFLUXDB_V2_AUTH_BASIC=True
         
         # For InfluxDB 1.8
-        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS, debug=True) as _client:
+        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS) as _client:
             logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
             
         ### For InfluxDB 2.0+
@@ -105,10 +105,14 @@ def archive_data_influx(data):
                 }
             }
             )
-
-        with _client.write_api(write_options=SYNCHRONOUS) as _write_client: 
-            _write_client.write(bucket=INFLUX_DB, record=output_list)
+        # write to InfluxDB 1.8
+        with _client.write_points(output_list) as _write_client: 
             logging.debug("Client write to InfluxDB successful.")
+        
+        # write to InfluxDB 2.0+
+        # with _client.write_api(write_options=SYNCHRONOUS) as _write_client: 
+        #     _write_client.write(bucket=INFLUX_DB, record=output_list)
+        #     logging.debug("Client write to InfluxDB successful.")
 
     except Exception as e: 
         logging.error(f"Problem with client connection to InfluxDB {influxURL}: {e}")
