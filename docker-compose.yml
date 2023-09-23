@@ -1,10 +1,10 @@
 version: '2'
 services:
-  influxdb:
+  cryptoonitor:
     image: cryptomonitor:latest
     volumes:
       - ./jsons:/jsons
-      - ./.env:/app/.env.prod
+      - ./.env:/app/.env
     env_file:
       - ./.env.cryptomonitor
     restart: always
