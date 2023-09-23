@@ -17,6 +17,8 @@ import time
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.write_api import SYNCHRONOUS
 
+from influxdb import InfluxDBClient
+
 def load_env():
     # load .env variables into environment
     if os.path.exists(".env"):
@@ -64,7 +66,7 @@ def archive_data_influx(data):
     # Set Influx to true to archive data to InfluxDB
     INFLUX_HOST=os.getenv("INFLUX_HOST", 'localhost')
     INFLUX_PORT=int(os.getenv("INFLUX_PORT", "8086"))
-    INFLUX_DB=os.getenv("INFLUX_DB", 'cryptomon')
+    INFLUX_DB=os.getenv("INFLUX_DB", 'maindb')
     INFLUX_USER=os.getenv("INFLUX_USER", 'coinarchiver')
     INFLUX_PASS=os.getenv("INFLUX_PASS", 'coinpass')
     INFLUX_BUCKET=os.getenv("INFLUX_BUCKET", 'cryptomon')
@@ -73,9 +75,13 @@ def archive_data_influx(data):
 
     # open InfluxDB client connection
     try:  
-        # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)  
-        with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
+        # client=InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS)
+        INFLUXDB_V2_AUTH_BASIC=True
+        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_DB, INFLUX_USER, INFLUX_PASS, debug=True) as _client:
             logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
+            
+        # with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
+        #     logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
 
         # format output list
         output_list = []
