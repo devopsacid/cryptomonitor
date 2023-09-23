@@ -99,14 +99,15 @@ def archive_data_influx(data):
         # INFLUXDB_V2_AUTH_BASIC=True
         
         # For InfluxDB 1.8
-        with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_USER, INFLUX_PASS, INFLUX_DB) as client:
-            logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
-                    
-            # write to InfluxDB 1.8
-            with client.create_database(INFLUX_DB) as _create_client:
-                logging.debug(f"Client create database {INFLUX_DB} successful.")        
-            with client.write_points(output_list) as _write_client: 
-                logging.debug("Client write to InfluxDB successful.", dumps(output_list))
+        # with InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_USER, INFLUX_PASS, INFLUX_DB) as client:
+        #     logging.debug(f"Client connection to InfluxDB successful. {influxURL}")
+        client = InfluxDBClient(INFLUX_HOST, INFLUX_PORT, INFLUX_USER, INFLUX_PASS, INFLUX_DB)
+        if client.ping():
+            logging.debug(f"Client ping to InfluxDB successful. {influxURL}")
+        if client.create_database(INFLUX_DB):
+            logging.debug(f"Client create database {INFLUX_DB} successful.")        
+        if client.write_points(output_list):
+            logging.debug("Client write to InfluxDB successful.", dumps(output_list))
         
         ### For InfluxDB 2.0+
         # with InfluxDBClient(url=influxURL, username=INFLUX_USER, password=INFLUX_PASS, org=INFLUX_ORG, debug=True) as _client:
