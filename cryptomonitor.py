@@ -168,7 +168,7 @@ def main():
         logging.info("InfluxDB archiving disabled.")
 
 if __name__ == "__main__":
-    sleep_time=int(os.getenv("SLEEP_TIME", "300"))
+    sleep_time=int(os.getenv("SLEEP_TIME", "60"))
     while True:
         main()
         logging.info(f"Sleeping for {sleep_time} seconds.")
