@@ -105,7 +105,10 @@ def archive_data_influx(data):
                 }
             }
             )
+            
         # write to InfluxDB 1.8
+        with _client.create_database(INFLUX_DB) as _create_client:
+            logging.debug(f"Client create database {INFLUX_DB} successful.")        
         with _client.write_points(output_list) as _write_client: 
             logging.debug("Client write to InfluxDB successful.")
         
