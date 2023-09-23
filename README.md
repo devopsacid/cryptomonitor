@@ -38,6 +38,8 @@ The Coin Archiver program is a Python script designed to fetch cryptocurrency da
 `INFLUX_PASS`: The password for authenticating with InfluxDB.  
 `INFLUX_BUCKET`: The bucket in InfluxDB to write to.  
 `INFLUX_ORG`: The organization in InfluxDB to write under.  
+`SLEEP_TIME`: Sleep time between API calls in seconds
+
 
 ## Usage
 Run the script using:
