@@ -12,9 +12,18 @@ from dotenv import load_dotenv
 import datetime
 import traceback
 import logging
+import time
 
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.write_api import SYNCHRONOUS
+
+def load_env():
+    # load .env variables into environment
+    if os.path.exists(".env"):
+        load_dotenv(".env")
+    else:
+        print("No .env file found")
+        exit(1)
 
 # function to load yaml file
 def load_yaml(filename):
@@ -116,6 +125,8 @@ def main():
         logging.basicConfig(level=logging.DEBUG)
     else:
         logging.basicConfig(level=logging.INFO)
+        
+    sleep_time=int(os.getenv("SLEEP_TIME", "300"))
 
     # Set WORKDIR to the directory where the script is running
     WORKDIR=os.getenv("WORKDIR", '.')
@@ -157,5 +168,9 @@ def main():
         logging.info("InfluxDB archiving disabled.")
 
 if __name__ == "__main__":
-    main()    
+    sleep_time=int(os.getenv("SLEEP_TIME", "300"))
+    while True:
+        main()
+        logging.info(f"Sleeping for {sleep_time} seconds.")
+        time.sleep(sleep_time)            
     exit(0)
